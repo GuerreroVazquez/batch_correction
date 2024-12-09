@@ -1,0 +1,18 @@
+services:
+    registration:
+        image: batch_correction:latest
+        build:
+          context: ./container
+          dockerfile: Dockerfile
+        container_name: batch_correction
+        volumes:
+          - ./:/home/correction/work
+        user: 'root'
+        ports:
+          - "8870:8888"
+        environment:
+          - ENABLE_JUPYTER_LAB=yes
+          - JUPYTER_TOKEN=123
+          - NB_USER=correction
+          - CHOWN_HOME=yes
+        working_dir: /home/correction
